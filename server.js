@@ -4,6 +4,8 @@ const connectDB = require('./config/db.js')
 const app = express()
 
 connectDB()
+app.use(express.json()) //used to parse json request instead of body-parser
+
 app.get('/', (req, res) => res.send('API running'))
 
 app.use('/api/users', require('./routes/users'))
