@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://condev:condev@condev.6tqmf.mongodb.net/Condev?retryWrites=true&w=majority"
+}
