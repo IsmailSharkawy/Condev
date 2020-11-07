@@ -44,7 +44,7 @@ router
 				}
 
 				//verifying password
-				const isMatch = bcryptjs.compare(password, user.password)
+				const isMatch = await bcryptjs.compare(password, user.password)
 
 				if (!isMatch) {
 					res.status(400).json({ msg: 'Invalid credentials' })
