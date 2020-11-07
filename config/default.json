@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://condev:condev@condev.6tqmf.mongodb.net/Condev?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://condev:condev@condev.6tqmf.mongodb.net/Condev?retryWrites=true&w=majority",
+    "jwtToken":"Yuki@2020"
 }
