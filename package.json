@@ -4,8 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start":"node server",
-    "server" : "nodemon server"
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "author": "Ismail El-Sharkawy",
   "license": "ISC",
@@ -17,6 +19,7 @@
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.12",
+    "react-bootstrap": "^1.4.0",
     "request": "^2.88.2"
   },
   "devDependencies": {
