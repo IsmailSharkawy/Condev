@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-const Login = () => {
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../actions/authActions'
+const Login = ({ history }) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
 	})
-
+	const dispatch = useDispatch()
 	const { email, password } = formData
+
+	const auth = useSelector((state) => state.auth)
+	const { isAuthenticated } = auth
 
 	const onInputChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -15,12 +19,16 @@ const Login = () => {
 
 	const onFormSubmit = async (e) => {
 		e.preventDefault()
-		console.log('success')
+		dispatch(loginUser(email, password))
+	}
+
+	if (isAuthenticated) {
+		history.push('/dashboard')
 	}
 	return (
 		<>
 			{' '}
-			<h1 className='large text-primary'>Sign Up</h1>
+			<h1 className='large text-primary'>Login</h1>
 			<p className='lead'>
 				<i className='fas fa-user'></i> Create Your Account
 			</p>

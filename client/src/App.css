@@ -13,9 +13,14 @@
 	padding: 0;
 }
 
+#root {
+	margin: 0;
+	height: 969px;
+}
 body {
 	font-family: 'Raleway', sans-serif;
 	font-size: 1rem;
+	height: 100%;
 	line-height: 1.6;
 	background-color: #fff;
 	color: #333;
@@ -41,7 +46,7 @@ img {
 	overflow: hidden;
 	padding: 0 2rem;
 	margin-top: 6rem;
-	margin-bottom: 3rem;
+	margin-bottom: 0;
 }
 
 /* Text Styles*/

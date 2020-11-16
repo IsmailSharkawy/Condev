@@ -47,49 +47,54 @@ router
 				res.status(400).json({ errors: errors.array() })
 			}
 
-			const {
-				company,
-				website,
-				location,
-				bio,
-				status,
-				githubusername,
-				skills,
-				youtube,
-				facebook,
-				twitter,
-				instagram,
-				linkedin,
-			} = req.body
-
-			//build profile object
-			const profileFields = {}
-			profileFields.user = req.user.id
-			if (company) profileFields.company = company
-			if (website) profileFields.website = website
-			if (location) profileFields.location = location
-
-			if (bio) profileFields.bio = bio
-			if (githubusername) profileFields.githubusername = githubusername
-			if (status) profileFields.status = status
-
-			if (skills)
-				profileFields.skills = skills.split(',').map((skill) => skill.trim())
-			if (youtube) profileFields.youtube = youtube
-			if (facebook) profileFields.facebook = facebook
-			if (twitter) profileFields.twitter = twitter
-			if (instagram) profileFields.instagram = instagram
-			if (linkedin) profileFields.linkedin = linkedin
-
-			//build social object
-			profileFields.social = {}
-			if (youtube) profileFields.social.youtube = youtube
-			if (facebook) profileFields.social.facebook = facebook
-			if (twitter) profileFields.social.twitter = twitter
-			if (instagram) profileFields.social.instagram = instagram
-			if (linkedin) profileFields.social.linkedin = linkedin
-
 			try {
+				const {
+					company,
+					website,
+					location,
+					bio,
+					status,
+					githubusername,
+					skills,
+					youtube,
+					facebook,
+					twitter,
+					instagram,
+					linkedin,
+				} = req.body
+
+				//build profile object
+				const profileFields = {}
+				profileFields.user = req.user.id
+				if (company) profileFields.company = company
+				if (website) profileFields.website = website
+				if (location) profileFields.location = location
+
+				if (bio) profileFields.bio = bio
+				if (githubusername) profileFields.githubusername = githubusername
+				if (status) profileFields.status = status
+
+				if (skills) {
+					profileFields.skills = skills
+						.toString()
+						.split(',')
+						.map((skill) => skill.trim())
+				}
+
+				if (youtube) profileFields.youtube = youtube
+				if (facebook) profileFields.facebook = facebook
+				if (twitter) profileFields.twitter = twitter
+				if (instagram) profileFields.instagram = instagram
+				if (linkedin) profileFields.linkedin = linkedin
+
+				//build social object
+				profileFields.social = {}
+				if (youtube) profileFields.social.youtube = youtube
+				if (facebook) profileFields.social.facebook = facebook
+				if (twitter) profileFields.social.twitter = twitter
+				if (instagram) profileFields.social.instagram = instagram
+				if (linkedin) profileFields.social.linkedin = linkedin
+
 				let profile = await Profile.findOne({ user: req.user.id })
 				if (profile) {
 					profile = await Profile.findOneAndUpdate(
@@ -135,10 +140,10 @@ router.route('/user/:id').get(protect, async (req, res) => {
 	const profile = await Profile.findOne({
 		user: req.params.id,
 	}).populate('user', ['name', 'avatar'])
-
+	console.log(profile.bio)
 	try {
 		if (!profile) {
-			res.status(400).json({ msg: 'No profiles exists' })
+			res.status(400).json({ msg: 'No profiles exist' })
 		} else {
 			res.json(profile)
 		}
